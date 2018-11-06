@@ -16,7 +16,7 @@ class MenuWidget extends Widget
     public function init()
     {
         parent::init();
-        if ($this->tpl == 'menu'){
+        if ($this->tpl =='menu'){
             $this->tpl = 'menu';
         }else{
             $this->tpl = 'select';
@@ -26,11 +26,17 @@ class MenuWidget extends Widget
 
     public function run()
     {
-        $this->data = Category::find()->indexBy('id')->asArray()->all();
-        $this->tree = $this->getTree();
-        $this->menuHtml = $this->getMenuHtml($this->tree);
+        $menu  = \Yii::$app->cache->get('menu');
 
-        return $this->menuHtml;
+        if ($menu){
+            return $menu;
+        }else{
+            $this->data = Category::find()->indexBy('id')->asArray()->all();
+            $this->tree = $this->getTree();
+            $this->menuHtml = $this->getMenuHtml($this->tree);
+            \Yii::$app->cache->set('menu', $this->menuHtml, 60);
+            return $this->menuHtml;
+        }
     }
 
     protected function getTree()
