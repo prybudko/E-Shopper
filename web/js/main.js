@@ -2,11 +2,21 @@
 
  $('#sl2').slider();
 
+jQuery(document).ready(function($) {
+    $('.category').dcAccordion({
+        eventType: 'click',
+        autoClose: true,
+        saveState: true,
+        disableLink: true,
+        showCount: true,
+        speed: 'slow'
+    });
+});
+
 	var RGBChange = function() {
 	  $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
 	};	
 
- $('.category').dcAccordion();
 
 /*scroll to top*/
 
