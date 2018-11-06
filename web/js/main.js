@@ -5,7 +5,9 @@
 	var RGBChange = function() {
 	  $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
 	};	
-		
+
+ $('.category').dcAccordion();
+
 /*scroll to top*/
 
 $(document).ready(function(){
