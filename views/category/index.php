@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 
-$this->title = 'My Yii Application';
 ?>
 
 <section id="slider"><!--slider-->
