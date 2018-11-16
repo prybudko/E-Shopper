@@ -5,7 +5,9 @@ namespace app\controllers;
 use app\models\Category;
 use app\models\Product;
 use Yii;
+use yii\base\Exception;
 use yii\data\Pagination;
+use yii\web\HttpException;
 
 class CategoryController extends AppController
 {
@@ -21,12 +23,15 @@ class CategoryController extends AppController
     {
         $id = Yii::$app->request->get('id');
 
+        $category = Category::findOne($id);
+        if(empty($category)){
+            throw new HttpException(404, 'Такой категории нет!');
+        }
+
         //products with pagination
         $query = Product::find()->where(['category_id'=>$id])->asArray();
         $pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 3, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $products = $query->offset($pages->offset)->limit($pages->limit)->all();
-
-        $category = Category::findOne($id);
         $this->setMeta('E-Shopper | '. $category->name, $category->keywords, $category->description);
 
         return $this->render('view', compact('products', 'pages', 'category'));
