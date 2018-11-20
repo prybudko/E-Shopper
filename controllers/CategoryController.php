@@ -39,7 +39,12 @@ class CategoryController extends AppController
 
     public function actionSearch()
     {
-       $queryNameProduct = Yii::$app->request->get('search');
+       $queryNameProduct = trim(Yii::$app->request->get('search'));
+       $this->setMeta('E-Shopper | ' . $queryNameProduct);
+       if (!$queryNameProduct){
+           return $this->render('search');
+       }
+
         //products with pagination
         $query = Product::find()->where(['like', 'name', $queryNameProduct])->asArray();
         $pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 3, 'forcePageParam' => false, 'pageSizeParam' => false]);

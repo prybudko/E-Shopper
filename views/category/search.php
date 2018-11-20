@@ -55,7 +55,7 @@ use yii\widgets\LinkPager;
 
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <h2 class="title text-center">Вы искали: <?=$queryNameProduct; ?></h2>
+                    <h2 class="title text-center">Вы искали: <?=Html::encode($queryNameProduct); ?></h2>
                     <?php if (!empty($products)): ?>
                         <?php $i = 0;
                         foreach ($products as $product): ?>
