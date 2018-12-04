@@ -5,7 +5,6 @@ namespace app\controllers;
 use app\models\Category;
 use app\models\Product;
 use Yii;
-use yii\base\Exception;
 use yii\data\Pagination;
 use yii\web\HttpException;
 
